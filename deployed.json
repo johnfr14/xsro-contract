@@ -1,0 +1,26 @@
+{
+ "xSRO": {
+  "matic": {
+   "address": "0x61d2Eb961a91e01BBF187Deb873913053885E6d6"
+  },
+  "rinkeby": {
+   "address": "0x38e44d6FC19210B78cF124765B68bDF22D43318C"
+  },
+  "goerli": {
+   "address": "0xF2E2ac983Db0fD209Fa0a6b5633Bf33cc7756b92"
+  }
+ },
+ "SwapSRO": {
+  "rinkeby": {
+   "address": "0x2C71Af6AEeb55bfb6973fa1e9E7274CA2968987A"
+  },
+  "goerli": {
+   "address": "0x50ad34597C861B4a1B16faFdF65E0ca31690a0A7"
+  }
+ },
+ "NFT": {
+  "rinkeby": {
+   "address": "0x2477ee0149ea0dD49FaDFAb6fCD9c953A33BB61e"
+  }
+ }
+}
