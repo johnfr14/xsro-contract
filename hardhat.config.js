@@ -2,6 +2,8 @@ require('@nomiclabs/hardhat-waffle');
 require('@nomiclabs/hardhat-solhint');
 require('@nomiclabs/hardhat-etherscan');
 require('hardhat-contract-sizer');
+require('hardhat-gas-reporter');
+require('hardhat-docgen');
 
 require('dotenv').config();
 const INFURA_PROJECT_ID = process.env.INFURA_PROJECT_ID;
@@ -16,7 +18,7 @@ module.exports = {
     version: '0.8.7',
     settings: {
       optimizer: {
-        enabled: true,
+        enabled: process.env.OPTIMIZER == 1,
         runs: 200,
       },
     },
@@ -58,7 +60,15 @@ module.exports = {
   },
   contractSizer: {
     alphaSort: true,
-    runOnCompile: true,
+    runOnCompile: process.env.CONTRACT_SIZER == 1,
     disambiguatePaths: true,
+  },
+  gasReporter: {
+    enabled: process.env.REPORT_GAS == 1,
+  },
+  docgen: {
+    path: './docs',
+    clear: true,
+    runOnCompile: process.env.DOCGEN == 1,
   },
 };
