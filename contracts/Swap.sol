@@ -2,14 +2,18 @@
 pragma solidity ^0.8.7;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
 import "./xSRO.sol";
 
 contract SwapSRO is Ownable {
+    using Address for address payable;
+
     SarahRO private _token;
     address private _tokenOwner;
     uint256 private _rate;
 
-    event Swapped(address indexed swapper, uint256 EthAmount, uint256 SroAmount);
+    event Swapped(address indexed swapper, uint256 ethAmount, uint256 sroAmount);
+    event Withdrew(address indexed owner, uint256 amount);
 
     constructor(address xsroAddress, address tokenOwner_) {
         _token = SarahRO(xsroAddress);
@@ -23,6 +27,13 @@ contract SwapSRO is Ownable {
 
     function swapTokens() public payable {
         _swapTokens(msg.sender, msg.value);
+    }
+
+    function withdrawAll() public onlyOwner {
+        uint256 amount = address(this).balance;
+        require(amount > 0, "SwapSRO: nothing to withdraw");
+        payable(msg.sender).sendValue(amount);
+        emit Withdrew(msg.sender, amount);
     }
 
     function setRate(uint256 rate_) public onlyOwner {
@@ -41,11 +52,18 @@ contract SwapSRO is Ownable {
         return amount * _rate;
     }
 
+    function token() public view returns (address) {
+        return address(_token);
+    }
+
+    function tokenOwner() public view returns (address) {
+        return _tokenOwner;
+    }
+
     function _swapTokens(address sender, uint256 amount) private {
         // require
         uint256 tokenAmount = amount * _rate;
         _token.transferFrom(_tokenOwner, sender, tokenAmount);
-        // emit
         emit Swapped(sender, amount, tokenAmount);
     }
 }

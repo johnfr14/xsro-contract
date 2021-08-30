@@ -67,10 +67,10 @@ contract SRO721 is ERC721, ERC721Enumerable, ERC721URIStorage {
     function like(uint256 nft) public returns (bool) {
         require(nft <= totalSupply(), "SRO721: Out of bounds");
         require(nft > 0, "SRO721: Out of bounds");
-        bool liked = _liked[msg.sender][nft];
+        bool liked = _liked[_msgSender()][nft];
         liked ? _nfts[nft].likes -= 1 : _nfts[nft].likes += 1;
-        _liked[msg.sender][nft] = !liked;
-        emit Liked(msg.sender, nft, !liked);
+        _liked[_msgSender()][nft] = !liked;
+        emit Liked(_msgSender(), nft, !liked);
         return !liked;
     }
 
