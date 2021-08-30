@@ -4,7 +4,7 @@ const hre = require('hardhat');
 const { deployed } = require('./deployed');
 const { readJson } = require('./readJson');
 
-const MARKETPLACE_CONTRACT = 'Marketplace';
+const TOKEN_CONTRACT = 'xSRO';
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -21,15 +21,15 @@ async function main() {
   const json = await readJson();
 
   // We get the contract to deploy
-  const NFT = await hre.ethers.getContractFactory('SRO721');
-  const nft = await NFT.deploy(json[MARKETPLACE_CONTRACT][hre.network.name].address);
+  const MARKETPLACE = await hre.ethers.getContractFactory('SwapSRO');
+  const marketplace = await MARKETPLACE.deploy(json[TOKEN_CONTRACT][hre.network.name].address);
 
   // Attendre que le contrat soit réellement déployé, cad que la transaction de déploiement
   // soit incluse dans un bloc
-  await nft.deployed();
+  await marketplace.deployed();
 
   // Create/update deployed.json and print usefull information on the console.
-  await deployed('SRO721', hre.network.name, nft.address);
+  await deployed('Marketplace', hre.network.name, marketplace.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

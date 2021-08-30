@@ -60,9 +60,14 @@ contract SwapSRO is Ownable {
         return _tokenOwner;
     }
 
+    function ownerAllowance() public view returns (uint256) {
+        return _token.allowance(_tokenOwner, address(this));
+    }
+
     function _swapTokens(address sender, uint256 amount) private {
         // require
         uint256 tokenAmount = amount * _rate;
+        require(tokenAmount <= ownerAllowance(), "SwapSRO: you cannot swap more than the allowance");
         _token.transferFrom(_tokenOwner, sender, tokenAmount);
         emit Swapped(sender, amount, tokenAmount);
     }

@@ -4,6 +4,7 @@ const { deployed } = require('./deployed');
 const TOKEN_CONTRACT = 'xSRO';
 const NFT_CONTRACT = 'SRO721';
 const MARKETPLACE_CONTRACT = 'Marketplace';
+const SWAP_CONTRACT = 'SwapSRO';
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -35,6 +36,16 @@ async function main() {
   await nft.deployed();
 
   await deployed(NFT_CONTRACT, hre.network.name, nft.address);
+
+  // SwapSRO
+  console.log(`Deploying ${SWAP_CONTRACT} with the account:`, deployer.address);
+
+  const SWAP = await hre.ethers.getContractFactory('SwapSRO');
+  const swap = await SWAP.deploy(xsro.address, deployer.address);
+
+  await swap.deployed();
+
+  await deployed(SWAP_CONTRACT, hre.network.name, swap.address);
 }
 
 main()
