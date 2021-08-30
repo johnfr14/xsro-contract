@@ -127,10 +127,10 @@ contract Marketplace {
         return _saleIds.current();
     }
 
-    function _isContract(address account) private view returns (bool) {
+    function _isContract(address collection) private view returns (bool) {
         uint256 size;
         assembly {
-            size := extcodesize(account)
+            size := extcodesize(collection)
         }
         return size > 0;
     }

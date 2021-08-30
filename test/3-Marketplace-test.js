@@ -36,10 +36,16 @@ describe('Marketplace', function () {
       await marketplace.connect(alice).createSale(nft.address, 1, ethers.utils.parseEther('10'));
       expect(await marketplace.totalSale()).to.be.equal(1);
     });
+    it('Should list the order', async function () {
+      await marketplace.connect(alice).createSale(nft.address, 1, ethers.utils.parseEther('10'));
+      tx = await marketplace.getSale(1);
+      expect(tx[3]).to.be.equal(alice.address);
+    });
     it('Should revert with not a contract', async function () {
       await expect(marketplace.createSale(bob.address, 1, 100)).to.be.revertedWith(
         'Marketplace: collection address is not a contract'
       );
     });
+    it('Should ');
   });
 });
