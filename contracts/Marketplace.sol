@@ -58,7 +58,8 @@ contract Marketplace {
         uint256 nftId,
         uint256 price
     ) public returns (bool) {
-        require(_isContract(collectionAddress), "Marketplace: collection address is not a contract");
+        // require contract is part of our Collection
+        require(!isOnSale(collectionAddress, nftId), "Marketplace: This nft is already on sale");
         IERC721 collection = IERC721(collectionAddress);
         address owner = collection.ownerOf(nftId);
         require(msg.sender == owner, "Markerplace: you must be the owner of this nft");
@@ -84,7 +85,7 @@ contract Marketplace {
     // function remove sale
     function removeSale(uint256 saleId) public onSale(saleId) onlySeller(saleId) returns (bool) {
         MarketNft memory item = _sales[saleId];
-        item.status = Status.Cancelled;
+        _sales[saleId].status = Status.Cancelled;
         delete _saleByCollectionId[item.collection][item.nftId];
         emit Cancelled(msg.sender, saleId);
         return true;
@@ -125,13 +126,5 @@ contract Marketplace {
 
     function totalSale() public view returns (uint256) {
         return _saleIds.current();
-    }
-
-    function _isContract(address collection) private view returns (bool) {
-        uint256 size;
-        assembly {
-            size := extcodesize(collection)
-        }
-        return size > 0;
     }
 }

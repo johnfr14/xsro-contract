@@ -45,11 +45,6 @@ describe('Marketplace', function () {
       tx = marketplace.connect(alice).createSale(nft.address, 1, ethers.utils.parseEther('10'));
       await expect(tx).to.emit(marketplace, 'Registered').withArgs(alice.address, 1);
     });
-    it('Should revert with not a contract', async function () {
-      await expect(marketplace.createSale(bob.address, 1, 100)).to.be.revertedWith(
-        'Marketplace: collection address is not a contract'
-      );
-    });
     it('Should revert if not owner of the nft', async function () {
       await expect(marketplace.createSale(nft.address, 1, ethers.utils.parseEther('10'))).to.be.revertedWith(
         'Markerplace: you must be the owner of this nft'

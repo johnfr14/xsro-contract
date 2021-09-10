@@ -14,6 +14,7 @@ contract SwapSRO is Ownable {
 
     event Swapped(address indexed swapper, uint256 ethAmount, uint256 sroAmount);
     event Withdrew(address indexed owner, uint256 amount);
+    event RateChanged(address indexed owner, uint256 newRate);
 
     constructor(address xsroAddress, address tokenOwner_) {
         _token = SarahRO(xsroAddress);
@@ -37,7 +38,9 @@ contract SwapSRO is Ownable {
     }
 
     function setRate(uint256 rate_) public onlyOwner {
+        require(rate_ > 0, "SwapSRO: rate cannot be 0");
         _rate = rate_;
+        emit RateChanged(msg.sender, rate_);
     }
 
     function rate() public view returns (uint256) {
