@@ -18,7 +18,7 @@ describe('Marketplace', function () {
 
     await swap.deployed();
 
-    await xsro.approve(swap.address, ethers.utils.parseEther('1000'));
+    await xsro.approve(swap.address, ethers.utils.parseEther('1000000'));
   });
   describe('Deployment', function () {
     it('Token address', async function () {
@@ -28,7 +28,7 @@ describe('Marketplace', function () {
       expect(await swap.tokenOwner()).to.be.equal(deployer.address);
     });
     it('Rate', async function () {
-      expect(await swap.rate()).to.be.equal(10);
+      expect(await swap.rate()).to.be.equal(1000);
     });
   });
   describe('Swap ETH to xSRO', function () {
@@ -37,7 +37,7 @@ describe('Marketplace', function () {
       await expect(() => tx).to.changeTokenBalances(
         xsro,
         [deployer, alice],
-        [ethers.utils.parseEther('10').mul(-1), ethers.utils.parseEther('10')]
+        [ethers.utils.parseEther('1000').mul(-1), ethers.utils.parseEther('1000')]
       );
     });
     it('Should transfer ETH from buyer to swap contract', async function () {
@@ -50,7 +50,7 @@ describe('Marketplace', function () {
     it('Should emit an event', async function () {
       await expect(swap.connect(alice).swapTokens({ value: ethers.utils.parseEther('5') }))
         .to.emit(swap, 'Swapped')
-        .withArgs(alice.address, ethers.utils.parseEther('5'), ethers.utils.parseEther('50'));
+        .withArgs(alice.address, ethers.utils.parseEther('5'), ethers.utils.parseEther('5000'));
     });
     it('Should revert if the allowance from token owner is not enough', async function () {
       await xsro.approve(swap.address, ethers.utils.parseEther('1'));

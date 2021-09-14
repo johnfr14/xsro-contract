@@ -10,7 +10,7 @@ import "./Marketplace.sol";
 /// @title NFT Collection SRO.
 /// @author Team SarahRo (SRO).
 /// @notice Create a NFT SRO Collection contract for the marketplace.
-/// @dev This swap connects to a ERC20 contract (Marketplace.sol).
+/// @dev This is an implementation of ERC721 with enumerable and URI extensions.
 
 contract SRO721 is ERC721, ERC721Enumerable, ERC721URIStorage {
     using Counters for Counters.Counter;
@@ -27,23 +27,23 @@ contract SRO721 is ERC721, ERC721Enumerable, ERC721URIStorage {
 
     // State variables
     Marketplace private _marketAddress;
-    Counters.Counter private _nftIds; 
-    mapping(uint256 => Nft) private _nfts; 
-    mapping(address => mapping(uint256 => bool)) private _liked; 
+    Counters.Counter private _nftIds;
+    mapping(uint256 => Nft) private _nfts;
+    mapping(address => mapping(uint256 => bool)) private _liked;
     // TODO Changement pour enumerable pour éviter les limites de gaz / temps d'exécution.
     mapping(address => uint256[]) private _authorToIds;
 
     // Events
     event Created(address indexed author, uint256 indexed nftId);
-    event Liked(address indexed user, uint256 indexed nftId, bool isLike); 
+    event Liked(address indexed user, uint256 indexed nftId, bool isLike);
 
     // Constructor
     constructor(address marketplaceAddress) ERC721("ERC721", "721") {
-        _marketAddress = Marketplace(marketplaceAddress); 
+        _marketAddress = Marketplace(marketplaceAddress);
     }
 
-    /// @notice The create function allows to create new NFT. 
-    /// @dev The receive function is public.
+    /// @notice The create function allows to create new NFT.
+    /// @dev The create function is public.
     /// @param royalties_ Royalties for creator of NFT - Require (max amount is 50%).
     /// @param title_ Title of NFT.
     /// @param description_ Description of NFT.
@@ -64,16 +64,16 @@ contract SRO721 is ERC721, ERC721Enumerable, ERC721URIStorage {
         _setTokenURI(currentId, uri_);
         _nfts[currentId] = Nft(_msgSender(), timestamp, royalties_, 0, title_, description_);
         _authorToIds[_msgSender()].push(currentId);
-        emit Created(_msgSender(), currentId); 
-        return currentId; 
+        emit Created(_msgSender(), currentId);
+        return currentId;
     }
 
     /// @notice The like function allows you to like or unlike a nft. Require(limit like to only existing nft).
-    /// @dev The receive function is public.
-    /// @param nft Royalties for creator of NFT - Require (max amount is 50%).
+    /// @dev The like function is public.
+    /// @param nft The NFT id.
     /// @return bool.
 
-    // Todo : Changement Bool par Uint.
+    // Todo : Change Bool to Uint to lower gas consommation.
 
     function like(uint256 nft) public returns (bool) {
         require(nft <= totalSupply(), "SRO721: Out of bounds");
@@ -87,43 +87,43 @@ contract SRO721 is ERC721, ERC721Enumerable, ERC721URIStorage {
 
     /// @notice Check the NFT by ID.
     /// @dev The getNftById function is public view.
-    /// @return ID of NFT.
-    
+    /// @return NFT information.
+
     function getNftById(uint256 id) public view returns (Nft memory) {
         return _nfts[id];
     }
 
-    /// @notice Check the NFT by Author.
-    /// @dev The getNftByAuthorAt function public wiew and via index access by enumeration (Work with getNftByAuthorTotal).
+    /// @notice Check the NFT by Author via index.
+    /// @dev The getNftByAuthorAt function is public view and via index access the _authorToIds array (Work with getNftByAuthorTotal).
     /// @param author Author of NFT.
-    /// @param index Index of author.
-    /// @return Author of NFT.
-            
+    /// @param index Index of array.
+    /// @return ID of NFT create by the address.
+
     function getNftByAuthorAt(address author, uint256 index) public view returns (uint256) {
         return _authorToIds[author][index];
     }
 
     /// @notice Check the total NFTs created by the author.
-    /// @dev The getNftByAuthorTotal function public wiew and access by enumeration.
+    /// @dev The getNftByAuthorTotal function is public view and use to get the total nft.
     /// @param author Author of NFT.
-    /// @return Total NFT.
+    /// @return Total NFT create by the address.
 
     function getNftByAuthorTotal(address author) public view returns (uint256) {
         return _authorToIds[author].length;
     }
 
-    /// @notice Check if the address liked as NFT.
-    /// @dev The isLiked function public view.
-    /// @param account Account of like.
+    /// @notice Check if the address liked a NFT.
+    /// @dev The isLiked function is public view.
+    /// @param account Address.
     /// @param id Id of NFT.
     /// @return Bool.
 
     function isLiked(address account, uint256 id) public view returns (bool) {
         return _liked[account][id];
     }
-  
+
     /// @notice Check the marketplace address.
-    /// @dev The marketAddress function public view.
+    /// @dev The marketAddress function is public view.
     /// @return Address of marketplace.
 
     function marketAddress() public view returns (address) {
@@ -147,13 +147,13 @@ contract SRO721 is ERC721, ERC721Enumerable, ERC721URIStorage {
     function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
-     
-    /// @notice inherits of _beforeTokenTransfer and we check that the NFT that is trying to be transferred, we check its status on the market if it is on sale no exchange possible.
+
+    /// @notice inherits of _beforeTokenTransfer and we check the status of the nft trying to be transferred from the marketplace, if it is on sale the transfer is not possible.
     /// @dev The _beforeTokenTransfer function is public view and override(ERC721, ERC721Enumerable).
     /// @param from Id of sender.
     /// @param to address of recipient.
     /// @param tokenId Id of token.
-    
+
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -163,7 +163,7 @@ contract SRO721 is ERC721, ERC721Enumerable, ERC721URIStorage {
         bool onSale = _marketAddress.isOnSale(address(this), tokenId);
         require(!onSale, "SRO721: you cannot transfer your nft while it is on sale");
     }
-    
+
     /// @notice inherits of _burn and Override (required).
     /// @dev The _burn function is internal and override(ERC721, ERC721Enumerable).
     /// @param tokenId Id of token.

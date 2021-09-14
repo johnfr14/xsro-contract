@@ -46,6 +46,12 @@ async function main() {
   await swap.deployed();
 
   await deployed(SWAP_CONTRACT, hre.network.name, swap.address);
+
+  // Owner approve token
+  console.log(`Approve ${SWAP_CONTRACT} from ${TOKEN_CONTRACT} with the account:`, deployer.address);
+
+  await xsro.approve(swap.address, ethers.utils.parseEther('10000000'));
+  console.log(`${TOKEN_CONTRACT}: ${swap.address} has been approved by ${deployer.address}`);
 }
 
 main()

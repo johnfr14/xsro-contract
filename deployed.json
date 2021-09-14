@@ -1,22 +1,22 @@
 {
  "xSRO": {
   "rinkeby": {
-   "address": "0x54aF871EceD37C5dCF87362452A751621D3AdCFe"
+   "address": "0x2b81D2FD98c7977A3fB5037E0a2bca495c69228d"
   }
  },
  "Marketplace": {
   "rinkeby": {
-   "address": "0x20551A6ACFBE27963A2a3cd78923c6a6f66635B3"
+   "address": "0x4cAA52632FFcd3D31c86Cb41fc5cf3dc3dF768E8"
   }
  },
  "SRO721": {
   "rinkeby": {
-   "address": "0xAEDed2a8Dd9EF701A5A28D70c8B66E30AC37307d"
+   "address": "0x4E50c5ae63Cb14D4c031F4780CCdB4C3b740B344"
   }
  },
  "SwapSRO": {
   "rinkeby": {
-   "address": "0x156D7635D30231B44016F0658D69F8ca9B6c2147"
+   "address": "0x63A70f12477d039aF1085C27402D227c2095a3F3"
   }
  }
 }

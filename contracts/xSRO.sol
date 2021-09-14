@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 /// @author Team SarahRo (SRO).
 /// @notice Token is a basic ERC20.
 
-// Todo changer le nom de la fonction.
+// Todo changer le nom du contrat.
 
 contract SarahRO is ERC20 {
     constructor() ERC20("xSarahRO", "xSRO") {

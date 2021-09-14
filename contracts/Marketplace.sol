@@ -5,24 +5,15 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-/// @title NFT Collection SRO.
+/// @title Marketplace.
 /// @author Team SarahRo (SRO).
 /// @notice Create a NFT SRO Collection contract for the marketplace.
 /// @dev This Marketplace connects to a ERC20 and ERC721 contracts by import OpenZeppelin.
 
 contract Marketplace {
-   using Counters for Counters.Counter;
+    using Counters for Counters.Counter;
 
-   // Structure
-   struct MarketNft {
-        Status status;
-        uint256 nftId; 
-        uint256 price;
-        address seller;
-        address collection;
-    }
-
-   // Enums
+    // Enums
     enum Status {
         Inactive,
         OnSale,
@@ -30,11 +21,20 @@ contract Marketplace {
         Cancelled
     }
 
+    // Structure
+    struct MarketNft {
+        Status status;
+        uint256 nftId;
+        uint256 price;
+        address seller;
+        address collection;
+    }
+
     // State variables
     IERC20 private _token;
     Counters.Counter private _saleIds;
     mapping(uint256 => MarketNft) private _sales; // struc des vente
-    mapping(address => mapping(uint256 => uint256)) private _saleByCollectionId; // retrouver la vente via l'adresse et l'id 
+    mapping(address => mapping(uint256 => uint256)) private _saleByCollectionId; // retrouver la vente via l'adresse et l'id
 
     // Events
     event Registered(address indexed seller, uint256 indexed saleId); // Vente créé
@@ -42,24 +42,24 @@ contract Marketplace {
     event Cancelled(address indexed seller, uint256 indexed saleId); // Cancel
     event Sold(address indexed buyer, uint256 indexed saleId); // Sold
 
-   // Constructor
+    // Constructor
     constructor(address xsroAddress) {
         _token = IERC20(xsroAddress);
     }
 
-    // Modifiers 
-    
-    /// @notice Check that the NFT is not on sale.
+    // Modifiers
+
+    /// @notice Check that the NFT is on sale.
     /// @param saleId Id of sale.
 
-    modifier onSale(uint256 saleId) { 
+    modifier onSale(uint256 saleId) {
         require(_sales[saleId].status == Status.OnSale, "Marketplace: this nft is not on sale");
         _;
     }
 
-    /// @notice Check that it is the seller of the not.
+    /// @notice Check that it is the seller of the nft.
     /// @param saleId Id of sale.
-    
+
     modifier onlySeller(uint256 saleId) {
         address seller = _sales[saleId].seller;
         require(msg.sender == seller, "Markerplace: you must be the seller of this nft");
@@ -67,7 +67,7 @@ contract Marketplace {
     }
 
     // TODO Only authorize collection address from our NFT collection factory.
-     
+
     /// @notice Create a sale with SRO collection.
     /// @dev The createSale function is public.
     /// @param collectionAddress Address of collection.
@@ -80,7 +80,7 @@ contract Marketplace {
         uint256 nftId,
         uint256 price
     ) public returns (bool) {
-        require(!isOnSale(collectionAddress, nftId), "Marketplace: This nft is already on sale"); 
+        require(!isOnSale(collectionAddress, nftId), "Marketplace: This nft is already on sale");
         IERC721 collection = IERC721(collectionAddress);
         address owner = collection.ownerOf(nftId);
         require(msg.sender == owner, "Markerplace: you must be the owner of this nft");
@@ -88,8 +88,8 @@ contract Marketplace {
             collection.getApproved(nftId) == address(this) || collection.isApprovedForAll(msg.sender, address(this)),
             "Marketplace: you need to approve this contract"
         );
-        _saleIds.increment(); 
-        uint256 currentId = _saleIds.current(); 
+        _saleIds.increment();
+        uint256 currentId = _saleIds.current();
         _sales[currentId] = MarketNft(Status.OnSale, nftId, price, msg.sender, collectionAddress);
         _saleByCollectionId[collectionAddress][nftId] = currentId;
         emit Registered(msg.sender, currentId);

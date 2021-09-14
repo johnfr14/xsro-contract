@@ -15,13 +15,13 @@ contract SwapSRO is Ownable {
     using Address for address payable;
 
     // State variables
-    SarahRO private _token; 
-    address private _tokenOwner; 
-    uint256 private _rate; 
-    
+    SarahRO private _token;
+    address private _tokenOwner;
+    uint256 private _rate;
+
     // Events
-    event Swapped(address indexed swapper, uint256 ethAmount, uint256 sroAmount); 
-    event Withdrew(address indexed owner, uint256 amount); 
+    event Swapped(address indexed swapper, uint256 ethAmount, uint256 sroAmount);
+    event Withdrew(address indexed owner, uint256 amount);
     event RateChanged(address indexed owner, uint256 newRate); // Todo recupèrer sur le current front.
 
     // Constructor
@@ -32,13 +32,14 @@ contract SwapSRO is Ownable {
         _rate = 1000;
     }
 
-    /// @notice The receive function allows to send ETH to this address(Metamask to users). 
+    /// @notice The receive function allows to send ETH to this address(Metamask to contract).
     /// @dev The receive function is external & payable.
-    
+
     receive() external payable {
         _swapTokens(msg.sender, msg.value);
     }
-    /// @notice The receive function allows to swap token.
+
+    /// @notice The swapTokens function allows to swap token.
     /// @dev The receive function is public & payable.
 
     function swapTokens() public payable {
@@ -46,7 +47,7 @@ contract SwapSRO is Ownable {
     }
 
     /// @notice The withdrawAll function allows to retrieves ETH that users have exchanged.
-    /// @dev The receive function is public and only the owner can execute it.
+    /// @dev The withdrawAll function is public and only the owner can execute it.
 
     function withdrawAll() public onlyOwner {
         uint256 amount = address(this).balance;
@@ -76,7 +77,7 @@ contract SwapSRO is Ownable {
     /// @notice Check price xSRO to ETH (coming soon).
     /// @dev The sroToEth function is public view.
     /// @return Price xSRO to ETH.
-    
+
     function sroToEth(uint256 amount) public view returns (uint256) {
         return amount / _rate;
     }
@@ -84,7 +85,7 @@ contract SwapSRO is Ownable {
     /// @notice Check price ETH to xSRO.
     /// @dev The ethToSro function is public view.
     /// @return Price ETH to xSRO.
-    
+
     function ethToSro(uint256 amount) public view returns (uint256) {
         return amount * _rate;
     }
@@ -92,15 +93,15 @@ contract SwapSRO is Ownable {
     /// @notice Check token address.
     /// @dev The token function is public view.
     /// @return Address of token.
-    
+
     function token() public view returns (address) {
         return address(_token);
     }
 
     /// @notice Check token owner.
     /// @dev The tokenOwner function is public view.
-    /// @return Address owner of token.
-    
+    /// @return Address owner of xSRO token.
+
     function tokenOwner() public view returns (address) {
         return _tokenOwner;
     }
@@ -108,7 +109,7 @@ contract SwapSRO is Ownable {
     /// @notice The owner of the total supply authorizes the swap of the smart-contract.
     /// @dev The ownerAllowance function is public view.
     /// @return How many tokens are allowed for this address.
-  
+
     function ownerAllowance() public view returns (uint256) {
         //Todo Afficher les informations (combien il reste de xSRO à se procurer).
         return _token.allowance(_tokenOwner, address(this));
@@ -121,9 +122,9 @@ contract SwapSRO is Ownable {
 
     function _swapTokens(address sender, uint256 amount) private {
         // Todo "Require supplémentaire".
-        uint256 tokenAmount = amount * _rate; 
-        require(tokenAmount <= ownerAllowance(), "SwapSRO: you cannot swap more than the allowance"); 
-        _token.transferFrom(_tokenOwner, sender, tokenAmount); 
+        uint256 tokenAmount = amount * _rate;
+        require(tokenAmount <= ownerAllowance(), "SwapSRO: you cannot swap more than the allowance");
+        _token.transferFrom(_tokenOwner, sender, tokenAmount);
         emit Swapped(sender, amount, tokenAmount);
     }
 }
