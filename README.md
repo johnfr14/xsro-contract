@@ -20,7 +20,6 @@
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/SRO-SarahRo/xsro-contracts">
     <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/SRO-SarahRo/xsro-contracts">
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/SRO-SarahRo/xsro-contracts">
-    <img alt="GitHub" src="https://img.shields.io/github/license/SRO-SarahRo/xsro-contracts">
   </ul>
 </div>
 
@@ -70,9 +69,7 @@
 
 Cette section contient la liste des adresses des contrats déployés sur le réseau de test Ethereum `Rinkeby`
 
-
 ***Rinkeby TestNet*** (https://rinkeby.etherscan.io/)
-
 
 Contract Name   | Address                     | Explorers
 :-------- |:----------------------------- |:-------------------------
@@ -80,7 +77,6 @@ Contract Name   | Address                     | Explorers
 `SRO721`   | 0x176703E8e80E6405728F0b44eeaE7c0d17Bb4F53 | [etherscan](https://rinkeby.etherscan.io/address/0x176703E8e80E6405728F0b44eeaE7c0d17Bb4F53) |
 `Marketplace`   | 0x2d9cf5D3002dA56302bF5D7210463e6e6ae06A39 | [etherscan](https://rinkeby.etherscan.io/address/0x2d9cf5D3002dA56302bF5D7210463e6e6ae06A39) |
 `Swap`   | 0x87962cf7726020B6c902bB2e905Af880a248ab05 | [etherscan](https://rinkeby.etherscan.io/address/0x87962cf7726020B6c902bB2e905Af880a248ab05) |
-
 
 <div>
   <h2 id="contract-overview" ><b>Aperçu</b></h2>
@@ -195,7 +191,6 @@ $ npx hardhat test
 1. `npx hardhat verify --contract contracts/Marketplace.sol:Marketplace --network NETWORK_NAME DEPLOYED_CONTRACT_ADDRESS "xSRO deployed address"`
 1. `npx hardhat verify --contract contracts/Swap.sol:SwapSRO --network NETWORK_NAME DEPLOYED_CONTRACT_ADDRESS "xSRO deployed address" "deployer address"`
 
-
 <div>
   <h2 id="contract-test"><b>Test Smart-contrat</b></h2>
 </div>
@@ -228,8 +223,4 @@ Nos **tests** de smart-contract sont 100% automatisés et réalisé avec des scr
 
 [hardhat-gas-reporter](https://hardhat.org/plugins/hardhat-gas-reporter.html) qui nous permet de voir la consomation de gas de nos function
 
-
 ![Test consomation de gas des contrats](./img/hardhat-test-gas-reporter.png)
-
- 
-
