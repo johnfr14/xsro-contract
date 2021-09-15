@@ -3,8 +3,8 @@
 
 const { expect } = require('chai');
 
-describe('Marketplace', function () {
-  let deployer, alice, bob, xSRO, xsro, SWAP, swap, tx;
+describe('Swap', function () {
+  let deployer, alice, xSRO, xsro, SWAP, swap, tx;
 
   beforeEach(async function () {
     [deployer, alice, bob] = await ethers.getSigners();
