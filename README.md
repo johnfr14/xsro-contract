@@ -204,32 +204,32 @@ Nos **tests** de smart-contract sont 100% automatisés et réalisé avec des scr
 
 - **Test du xSRO contrat**
 
-![Test du xSRO contrat](../../assets/images/hardhat/hardhat-test-token.png)
+![Test du xSRO contrat](./img/hardhat-test-token.png)
 
 - **Test du SRO721 contrat**
 
-![Test du SRO721 contrat](../../assets/images/hardhat/hardhat-test-sro721.png)
+![Test du SRO721 contrat](./img/hardhat-test-sro721.png)
 
 - **Test du Marketplace contrat**
 
-![Test du Marketplace contrat](../../assets/images/hardhat/hardhat-test-marketplace.png)
+![Test du Marketplace contrat](./img/hardhat-test-marketplace.png)
 
 - **Test du Swap contrat**
 
-![Test du Swap contrat](../../assets/images/hardhat/hardhat-test-swap.png)
+![Test du Swap contrat](./img/hardhat-test-swap.png)
 
 - **Test Taille des contrats**
 
 [Hardhat-contract-sizer](https://hardhat.org/plugins/hardhat-contract-sizer.html) qui nous permet d’avoir la tailles des contrats (qui est de 25kb Maximum)
 
-![Test Taille des contrats](../../assets/images/hardhat/hardhat-test-contract-sizer.png)
+![Test Taille des contrats](./img/hardhat-test-contract-sizer.png)
 
 - **Test consomation de gas des contrats**
 
 [hardhat-gas-reporter](https://hardhat.org/plugins/hardhat-gas-reporter.html) qui nous permet de voir la consomation de gas de nos function
 
 
-![Test consomation de gas des contrats](../../assets/images/hardhat/hardhat-test-gas-reporter.png)
+![Test consomation de gas des contrats](./img/hardhat-test-gas-reporter.png)
 
  
 
