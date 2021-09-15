@@ -1,0 +1,22 @@
+{
+ "xSRO": {
+  "rinkeby": {
+   "address": "0x2b81D2FD98c7977A3fB5037E0a2bca495c69228d"
+  }
+ },
+ "Marketplace": {
+  "rinkeby": {
+   "address": "0x4cAA52632FFcd3D31c86Cb41fc5cf3dc3dF768E8"
+  }
+ },
+ "SRO721": {
+  "rinkeby": {
+   "address": "0x4E50c5ae63Cb14D4c031F4780CCdB4C3b740B344"
+  }
+ },
+ "SwapSRO": {
+  "rinkeby": {
+   "address": "0x63A70f12477d039aF1085C27402D227c2095a3F3"
+  }
+ }
+}

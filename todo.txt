@@ -1,0 +1,9 @@
+- Collection factory
+- Fees
+- User Exp
+
+Gestion de contenu ?
+
+Marketplace:  seller enumerable
+              currencies (ETH, xSRO, ...)
+              add variable to buy

@@ -1,6 +1,9 @@
 require('@nomiclabs/hardhat-waffle');
 require('@nomiclabs/hardhat-solhint');
 require('@nomiclabs/hardhat-etherscan');
+require('hardhat-contract-sizer');
+require('hardhat-gas-reporter');
+require('hardhat-docgen');
 
 require('dotenv').config();
 const INFURA_PROJECT_ID = process.env.INFURA_PROJECT_ID;
@@ -11,7 +14,15 @@ const VEFIRY_API_KEY = process.env.VEFIRY_API_KEY;
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: '0.8.6',
+  solidity: {
+    version: '0.8.7',
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
   networks: {
     mainnet: {
       url: `https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`,
@@ -46,5 +57,18 @@ module.exports = {
   },
   etherscan: {
     apiKey: VEFIRY_API_KEY,
+  },
+  contractSizer: {
+    alphaSort: true,
+    runOnCompile: true,
+    disambiguatePaths: true,
+  },
+  gasReporter: {
+    enabled: true,
+  },
+  docgen: {
+    path: './docs',
+    clear: true,
+    runOnCompile: true,
   },
 };

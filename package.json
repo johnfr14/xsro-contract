@@ -1,5 +1,5 @@
 {
-  "name": "Hardhat-Template",
+  "name": "Hardhat-SRO",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -21,8 +21,14 @@
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.3",
     "hardhat": "^2.5.0",
+    "hardhat-contract-sizer": "^2.0.3",
+    "hardhat-docgen": "^1.1.2",
+    "hardhat-gas-reporter": "^1.0.4",
     "prettier": "^2.3.2",
     "prettier-plugin-solidity": "^1.0.0-beta.17",
     "solhint": "^3.3.6"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.2.0"
   }
 }
