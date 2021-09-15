@@ -1,4 +1,3 @@
-# Hardhat-SRO
 <div>
 <div align="center">
   <img alt="Welcome SRO" src="./img/sro.svg">
