@@ -18,7 +18,7 @@ module.exports = {
     version: '0.8.7',
     settings: {
       optimizer: {
-        enabled: process.env.OPTIMIZER == 1,
+        enabled: true,
         runs: 200,
       },
     },
@@ -60,15 +60,15 @@ module.exports = {
   },
   contractSizer: {
     alphaSort: true,
-    runOnCompile: process.env.CONTRACT_SIZER == 1,
+    runOnCompile: true,
     disambiguatePaths: true,
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS == 1,
+    enabled: true,
   },
   docgen: {
     path: './docs',
     clear: true,
-    runOnCompile: process.env.DOCGEN == 1,
+    runOnCompile: true,
   },
 };

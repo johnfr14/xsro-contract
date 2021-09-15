@@ -45,6 +45,12 @@ describe('Marketplace', function () {
       tx = marketplace.connect(alice).createSale(nft.address, 1, ethers.utils.parseEther('10'));
       await expect(tx).to.emit(marketplace, 'Registered').withArgs(alice.address, 1);
     });
+    it('Should revert if nft is already on sale', async function () {
+      await marketplace.connect(alice).createSale(nft.address, 1, ethers.utils.parseEther('10'));
+      await expect(
+        marketplace.connect(alice).createSale(nft.address, 1, ethers.utils.parseEther('10'))
+      ).to.be.revertedWith('Marketplace: This nft is already on sale');
+    });
     it('Should revert if not owner of the nft', async function () {
       await expect(marketplace.createSale(nft.address, 1, ethers.utils.parseEther('10'))).to.be.revertedWith(
         'Markerplace: you must be the owner of this nft'

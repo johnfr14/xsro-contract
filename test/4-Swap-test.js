@@ -82,4 +82,21 @@ describe('Marketplace', function () {
       await expect(swap.withdrawAll()).to.be.revertedWith('SwapSRO: nothing to withdraw');
     });
   });
+  describe('setRate', function () {
+    it('Should change the ETH to xSRO rate', async function () {
+      await swap.setRate(100);
+      expect(await swap.rate()).to.be.equal(100);
+    });
+    it('Should emit an event', async function () {
+      await expect(swap.setRate(100)).to.emit(swap, 'RateChanged').withArgs(deployer.address, 100);
+    });
+    it('Should revert if new rate is 0', async function () {
+      await expect(swap.setRate(0)).to.be.revertedWith('SwapSRO: rate cannot be 0');
+    });
+  });
+  describe('ownerAllowance', function () {
+    it('Should return the approve amount made by the owner of the total supply', async function () {
+      expect(await swap.ownerAllowance()).to.be.equal(ethers.utils.parseEther('1000000'));
+    });
+  });
 });
