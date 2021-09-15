@@ -9,9 +9,13 @@
       |
     <a href="#contract-design">Architecture</a>
       |
+    <a href="#contract-deployed_address">Deployed_address</a>
+      |
     <a href="#contract-overview">Aperçu</a>
       |
     <a href="#contract-install">Installation et configuration</a>
+      |
+    <a href="#contract-test">Test Smart-contract</a>
   </div>
 </div>
 <div >
