@@ -76,10 +76,10 @@ Cette section contient la liste des adresses des contrats déployés sur le rés
 
 Contract Name   | Address                     | Explorers
 :-------- |:----------------------------- |:-------------------------
-`xSRO`   | 0x54aF871EceD37C5dCF87362452A751621D3AdCFe | [etherscan](https://rinkeby.etherscan.io/address/0x54aF871EceD37C5dCF87362452A751621D3AdCFe) |
-`NFT`   | 0xAEDed2a8Dd9EF701A5A28D70c8B66E30AC37307d | [etherscan](https://rinkeby.etherscan.io/address/0xAEDed2a8Dd9EF701A5A28D70c8B66E30AC37307d) |
-`Marketplace`   | 0x20551A6ACFBE27963A2a3cd78923c6a6f66635B3 | [etherscan](https://rinkeby.etherscan.io/address/0x20551A6ACFBE27963A2a3cd78923c6a6f66635B3) |
-`Swap`   | 0x156D7635D30231B44016F0658D69F8ca9B6c2147 | [etherscan](https://rinkeby.etherscan.io/address/0x156D7635D30231B44016F0658D69F8ca9B6c2147) |
+`xSRO`   | 0xf94Bc0b0411284de46EEEE6C653A18CFd51Ef9C8 | [etherscan](https://rinkeby.etherscan.io/address/0xf94Bc0b0411284de46EEEE6C653A18CFd51Ef9C8) |
+`SRO721`   | 0x176703E8e80E6405728F0b44eeaE7c0d17Bb4F53 | [etherscan](https://rinkeby.etherscan.io/address/0x176703E8e80E6405728F0b44eeaE7c0d17Bb4F53) |
+`Marketplace`   | 0x2d9cf5D3002dA56302bF5D7210463e6e6ae06A39 | [etherscan](https://rinkeby.etherscan.io/address/0x2d9cf5D3002dA56302bF5D7210463e6e6ae06A39) |
+`Swap`   | 0x87962cf7726020B6c902bB2e905Af880a248ab05 | [etherscan](https://rinkeby.etherscan.io/address/0x87962cf7726020B6c902bB2e905Af880a248ab05) |
 
 
 <div>
