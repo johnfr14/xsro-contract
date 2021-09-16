@@ -53,6 +53,7 @@ module.exports = {
     matic: {
       url: 'https://rpc-mumbai.maticvigil.com',
       accounts: [`0x${DEPLOYER_PRIVATE_KEY}`],
+      gasPrice: 8000000000,
     },
   },
   etherscan: {
@@ -69,6 +70,6 @@ module.exports = {
   docgen: {
     path: './docs',
     clear: true,
-    runOnCompile: true,
+    runOnCompile: false,
   },
 };

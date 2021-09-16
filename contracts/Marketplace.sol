@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 /// @title Marketplace.
 /// @author Team SarahRo (SRO).
-/// @notice Create a NFT SRO Collection contract for the marketplace.
+/// @notice Create a marketplace contract for users to exchange their NFT.
 /// @dev This Marketplace connects to a ERC20 and ERC721 contracts by import OpenZeppelin.
 
 contract Marketplace {

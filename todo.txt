@@ -2,8 +2,11 @@
 - Fees
 - User Exp
 
-Gestion de contenu ?
+Change public function to external
+Add pausable to contract
 
 Marketplace:  seller enumerable
               currencies (ETH, xSRO, ...)
               add variable to buy
+
+Gestion de contenu ?

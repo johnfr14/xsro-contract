@@ -2,6 +2,12 @@
  "xSRO": {
   "rinkeby": {
    "address": "0x2b81D2FD98c7977A3fB5037E0a2bca495c69228d"
+  },
+  "testnet": {
+   "address": "0x6A564a10C434B75CD6Ca43B7024d55d7f4AfB386"
+  },
+  "matic": {
+   "address": "0x6A564a10C434B75CD6Ca43B7024d55d7f4AfB386"
   }
  },
  "Marketplace": {
