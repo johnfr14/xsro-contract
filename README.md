@@ -1,6 +1,6 @@
 <div>
 <div align="center">
-  <img alt="Welcome SRO" src="./img/sro.svg">
+  <img alt="Welcome SRO" src="https://ipfs.io/ipfs/QmbdSfiJuBP2XRcM1wuLWMCXLhRoQTvYM8fHYRwyHcKxoa">
   </div>
     <h1 align="center"><b>Contrats SRO</b></h1>
     <div align="center">
